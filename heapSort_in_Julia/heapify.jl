@@ -2,8 +2,8 @@
 # using Statistics
 include("swap.jl")
 
-function heapify(a)
-    n = length(a)
+function heapify(a, currentHeapSize)
+    n = currentHeapSize
     j = 2
     while j <= n
         i = j
