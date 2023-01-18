@@ -12,5 +12,5 @@ else
     println("Stay Home\n")
 end
 
-@printf("true || false = %s\n", true || false ? "true" : "false")
+@printf("true OR false = %s\n", true || false ? "true" : "false")
 @printf("!true = %s\n", !true)
