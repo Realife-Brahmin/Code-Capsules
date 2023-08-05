@@ -1,2 +1,2 @@
-# common_code_database_repo
+# Code Capsules
  Codes which may not be a part of a bigger project.
