@@ -10,6 +10,8 @@ x = LinRange(lb_x, ub_x, N);
 y = LinRange(lb_x, ub_y, N);
 # Compute g(x, y)
 g = x.^2 .+ (y').^2;
+
+f = (y').* (x.^2)
 k = 1;
 
 plotg = plot!();
@@ -27,13 +29,6 @@ label=L"g(x, y) = k",
 color=:inferno,
 alpha=0.9);
 
-plot(plotg, title=L"g(x, y) = x^2 + y^2",
-xlabel=L"x",
-ylabel=L"y",
-zlabel=L"g(x, y)",
-legend=:outertopright,
-size = (800, 600))
-
 using JuMP, Ipopt
 model = Model(Ipopt.Optimizer)
 
@@ -47,11 +42,22 @@ model = Model(Ipopt.Optimizer)
 print(model)
 optimize!(model)
 
-optimal_x = value(x)
-optimal_y = value(y)
-optimal_f = objective_value(model)
+x★ = value(x)
+y★ = value(y)
+f★ = objective_value(model)
 
 println("Optimal Solutions:")
-println("x = ", optimal_x)
-println("y = ", optimal_y)
-println("Max Value of f(x, y) = ", optimal_f)
+println("x = ", x★)
+println("y = ", y★)
+println("Max Value of f(x, y) = ", f★)
+
+scatter!(plotg, [x★], [y★], [f★])
+
+plot(plotg, title=L"g(x, y) = x^2 + y^2",
+xlabel=L"x",
+ylabel=L"y",
+zlabel=L"g(x, y)",
+legend=:outertopright,
+size = (800, 600));
+
+display(plotg)
