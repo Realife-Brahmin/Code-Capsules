@@ -1,30 +1,30 @@
 using Plots
 using LaTeXStrings
 # Create a grid of (x, y) coordinates
-n = 100;
-x = LinRange(-1.5, 1.5, n);
-y = LinRange(-1.5, 1.5, n);
-# g = zeros(Float64, n, n)
+N = 100;
+x = LinRange(-2.5, 2.5, N);
+y = LinRange(-2.5, 2.5, N);
 # Compute g(x, y)
-g = x.^2 .+ (y').^2
+g = x.^2 .+ (y').^2;
+k = 6;
 
+plotg = plot!();
 # Plot the bowl
-surface(x, y, g, 
-title=L"$g(x, y) = x^2 + y^2$",
-xlabel=L"$x$",
-ylabel=L"$y$",
-zlabel=L"$g(x, y)$",
-Legend=L"$g(x, y)$")
+surface!(plotg, x, y, g, 
+Legend=L"g(x, y)",
+color=:inferno,
+alpha=0.7);
 
-# Plot the intersection curve: g(x, y) = 1
-# which is equivalent to y^2 = 1 - x^2
-for xi in x
-    if 1 - xi^2 >= 0
-        yi = sqrt(1 - xi^2)
-        plot!([xi], [yi], [1], seriestype=:scatter, color=:red, label=false)
-        plot!([xi], [-yi], [1], seriestype=:scatter, color=:red, label=false)
-    end
-end
 
-# Show the plot
-plot!(xlabel="x", ylabel="y", zlabel="g(x, y)", legend=:outertopright)
+glvl = k.*ones(size(g));
+
+surface!(plotg, x, y, glvl,
+Legend=L"g(x, y) = k",
+color=:inferno,
+alpha=0.9);
+
+plot(plotg, title=L"g(x, y) = x^2 + y^2",
+xlabel=L"x",
+ylabel=L"y",
+zlabel=L"g(x, y)",
+size = (800, 600))
