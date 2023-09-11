@@ -1,4 +1,6 @@
 using BenchmarkTools
+using CSV
+using DataFrames
 using LinearAlgebra
 using Revise
 using Symbolics
@@ -31,3 +33,8 @@ function objFun(;getGradientToo=true)
 end
 
 f, ∇f = objFun();
+
+rawDataFolder = "rawData/";
+filename = rawDataFolder*"FFD.csv";
+df = CSV.File(filename) |> DataFrame;
+rename!(df, [:t, :f])
