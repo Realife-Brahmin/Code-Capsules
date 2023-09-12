@@ -3,9 +3,9 @@ using CSV
 using DataFrames
 using LinearAlgebra
 using Revise
-using Symbolics
+using Symbolics: unwrap, istree, arguments
 
-@variables t x y;
+@variables t x y z;
 
 M = [t+2t^2 6t; x+2t+2y y^2];
 
@@ -22,19 +22,25 @@ f, f! = build_function(M, [x, y, t], expression=Val{false});
         ef!(A, inputs)
         (output=ef(inputs), M=M, A=A) # return not useful if you want to save
         # something from inside let block to an outside variable
-end;
-
-function objFun(;getGradientToo=true)
-        @variables A₀, A, τ, ω, α, ϕ
-        x = [A₀, A, τ, ω, α, ϕ] 
-        f = A₀ + A*exp(-t/τ)sin((ω+α*t)t + ϕ)
-        ∇f = Symbolics.gradient(f, x)
-        return f, ∇f
 end
 
-f, ∇f = objFun();
+Symbolics.jacobian([x + x*y, x^2 + y], [x, y]);
+Symbolics.hessian(x*y + y*z^2, [x, y, z]);
 
-rawDataFolder = "rawData/";
-filename = rawDataFolder*"FFD.csv";
-df = CSV.File(filename) |> DataFrame;
-rename!(df, [:t, :f])
+sin(cos(x))
+typeof(sin(cos(x)))
+fieldnames(Num)
+Num <: Real
+
+unwrapped_ex = Symbolics.unwrap(sin(cos(x)))
+typeof(unwrapped_ex)
+
+istree(unwrapped_ex)
+
+operation(unwrapped_ex)
+
+arguments(unwrapped_ex)
+
+let a = arguments(unwrapped_ex)[1]
+        istree(a), operation(a), arguments(a), typeof(arguments(a))[1]
+end
