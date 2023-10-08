@@ -37,7 +37,7 @@ function optimize_ddp(T, q, B0, B_min, B_max, iterations)
 end
 
 # Parameters
-T = 96  # You can adjust this for the desired number of time steps
+T = 3  # You can adjust this for the desired number of time steps
 q = 1
 B0 = 5
 B_min = 2
