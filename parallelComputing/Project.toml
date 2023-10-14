@@ -1,0 +1,8 @@
+[deps]
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+Demo1 = "3e06f52e-cf92-474d-a76c-50aac080329c"
+FiniteDiff = "6a86dc24-6348-571c-b903-95158fe2bd41"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+PkgTemplates = "14b8a8f1-9102-5b29-a752-f990bacb7fe1"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
