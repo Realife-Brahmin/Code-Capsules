@@ -13,8 +13,11 @@ df = CSV.File(filename, header=header) |> DF.DataFrame
 
 
 vscodedisplay(df)
+
 DF.describe(df)
+
 schema(df)
+
 coerce!(df, :sibsp => Count)
 schema(df)
 df_train, df_test = partition(df, 0.7, rng=123)
