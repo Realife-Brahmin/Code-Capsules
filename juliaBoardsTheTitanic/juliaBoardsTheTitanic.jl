@@ -7,9 +7,10 @@ import DataFrames as DF
 rawDataFolder = "rawData/"
 filename = rawDataFolder * "Indian Liver Patient Dataset (ILPD).csv"
 
-# table = OpenML.load(42638)
-# df = DF.DataFrame(table)
-df = CSV.File(filename) |> DF.DataFrame
+header = ["Age", "Gender", "TB", "DB", "Alkphos", "Sgpt", "Sgot", "TP", "ALB", "A/G Ratio"]
+
+df = CSV.File(filename, header=header) |> DF.DataFrame
+
 
 vscodedisplay(df)
 DF.describe(df)
